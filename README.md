@@ -67,7 +67,6 @@ CREATE TABLE reviews (
     FOREIGN KEY (application_id) REFERENCES applications(id) ON DELETE CASCADE,
     UNIQUE KEY unique_application_review (application_id)
 );
-
 -- Создание администратора (логин: Admin26, пароль: Demo20)
 INSERT INTO users (login, password, full_name, birth_date, phone, email, role)
 VALUES (
@@ -79,8 +78,10 @@ VALUES (
     'admin@driving.ru',
     'admin'
 ) ON DUPLICATE KEY UPDATE id=id;
-2. Подключение к БД и общие функции (config/db.php)
 
+
+
+2. Подключение к БД и общие функции (config/db.php)
 php
 <?php
 session_start();
@@ -116,6 +117,9 @@ function displayError($field, $errors) {
     }
 }
 ?>
+
+
+
 3. Регистрация (register.php)
 php
 <?php
@@ -165,7 +169,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -217,6 +220,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </body>
 </html>
+
+
+
 4. Авторизация (login.php)
 php
 <?php
@@ -274,6 +280,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </body>
 </html>
+
+
+
 5. Личный кабинет (profile.php) – история заявок, отзывы, слайдер
 php
 <?php
@@ -375,6 +384,9 @@ $applications = $apps->fetchAll();
     <script src="js/script.js"></script>
 </body>
 </html>
+
+
+
 6. Оформление новой заявки (application.php)
 php
 <?php
@@ -467,6 +479,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </script>
 </body>
 </html>
+
+
+
 7. Панель администратора (admin.php) – фильтрация, сортировка, пагинация, смена статуса
 php
 <?php
@@ -603,6 +618,9 @@ $total_pages = ceil($total / $per_page);
     <script src="js/script.js"></script>
 </body>
 </html>
+
+
+
 8. Выход (logout.php)
 php
 <?php
@@ -610,6 +628,9 @@ session_start();
 session_destroy();
 header("Location: login.php");
 exit;
+
+
+
 9. CSS стили (css/style.css) – адаптив, анимации, слайдер
 css
 /* Reset & базовые стили */
@@ -874,6 +895,9 @@ th {
     .btn { width: 100%; }
 }
 
+
+
+
 10. JavaScript (js/script.js) – слайдер, уведомления, анимации
 javascript
 // Слайдер на странице личного кабинета
@@ -936,6 +960,9 @@ function showToast(message, type) {
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 3000);
 }
+
+
+
 Инструкция по развёртыванию
 Установите веб-сервер (Apache/nginx) с PHP 7.4+ и MySQL.
 
